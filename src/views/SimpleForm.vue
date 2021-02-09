@@ -33,23 +33,12 @@
 
       <h3>Are pets allowed?</h3>
       <div>
-        <BaseRadio
+        <BaseRadioGroup
           v-model="event.pets"
-          :value="1"
-          label="Yes"
           name="pets"
+          :options="petOptions"
         />
       </div>
-
-      <div>
-        <BaseRadio
-          v-model="event.pets"
-          :value="0"
-          label="No"
-          name="pets"
-        />
-      </div>
-
       <h3>Extras</h3>
       <div>
         <BaseCheckbox
@@ -95,7 +84,11 @@ export default {
           catering: false,
           music: false
         }
-      }
+      },
+      petOptions: [
+        { label: 'Yes', value: 1 },
+        { label: 'No', value: 0 }
+      ]
     }
   }
 }
