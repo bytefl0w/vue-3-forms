@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Create an event</h1>
-    <form>
+    <form @submit.prevent="sendForm">
 
       <BaseSelect
         :options="categories"
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import BaseCheckbox from '../components/BaseCheckbox.vue'
 export default {
   components: { BaseCheckbox },
@@ -84,11 +85,24 @@ export default {
           catering: false,
           music: false
         }
-      },
-      petOptions: [
+      }, petOptions: [
         { label: 'Yes', value: 1 },
         { label: 'No', value: 0 }
       ]
+    }
+  },
+  methods: {
+    sendForm() {
+      // We will handle the submission here
+      axios.post('https://my-json-server.typicode.com/erikmortimer/vue-3-forms/events',
+        this.event
+      )
+        .then(function (response) {
+          console.log('Response', response)
+        })
+        .catch(function (err){
+          console.log('Error', err)
+        })
     }
   }
 }
